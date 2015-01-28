@@ -85,17 +85,28 @@ define(function() {
    var sorted_arr = arr.sort();
    var dup = [];
    var count = 0;
-   for (var i=0; i < arr.length ; i++){
-    for (var j=i+1; j < i ; i++){
-    if(sorted_arr[i] === arr[j]){
+    var seendup = [];
+    var index = 0;
+   //document.write(arr.length + "previous");
+   for (var i=0; i < arr.length - 1 ; i++){
+    //document.write(i);
+    if(sorted_arr[i] === arr[i+1]){
         
-    dup.push(sorted_arr[j]);
+    dup.push(sorted_arr[i]);
+       // document.write(dup);
     count ++;
+        //document.write(count);
     }
 }
+   
+  for(var i = 0; i < dup.length; i++) 
+  {
+if (seendup.indexOf(dup[i]) == -1)seendup.push(dup[i]);
+  }
+  //return n;
    //return count;
-   return dup;
-   }
+  //document.write(seendup);
+       return seendup;
     
     },
 
