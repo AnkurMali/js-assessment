@@ -67,12 +67,25 @@ define(function() {
     },
 
     curryIt : function(fn) {
+      function function1(fn, arguments) {
+        return fn.apply(undefined, arguments);
+      }
 
-      var slice = Array.prototype.slice,
-      args = slice.apply(arguments, [1]);
-      return function () {
-      return fn.apply(undefined, args.concat(slice.apply(arguments)));
-      };
+      function function2(args1,args2) {
+        return function (args3) {
+          args1.push(args3);
+
+          var allArgumentsProvided = args1.length === args2;
+
+          if (allArgumentsProvided) {
+            return function1(fn, args1);
+          } else {
+            return function2(args1, args2);
+          }
+        };
+      }
+
+      return function2([], fn.length);
     }
   };
 });
